@@ -18,6 +18,7 @@ namespace file_io
 
             var fusion = new Car() { ModelYear = 2017, Make = "Ford", Model = "Fusion", Doors = 4, Miles = 1024 };
 
+            // variable for writing to a file
             var carList = new List<Car> { corolla, civic, camaro, altima, fusion };
 
             // open file for writing
@@ -26,6 +27,23 @@ namespace file_io
                 // write all the cars to a file
                 carList.ForEach(car => writer.WriteLine(car));
             }
+
+            // variable for reading from a file
+            var carsFromFile = new List<Car>();
+
+            // read from a file
+            using (var reader = new StreamReader(File.Open("cars.csv", FileMode.OpenOrCreate)))
+            {
+                // read all the cars from the file
+                while (reader.Peek() >= 0)
+                {
+                    var carFromFile = reader.ReadLine();
+                    var data = carFromFile.Split(',');
+                    carsFromFile.Add(new Car(data));
+                }
+            }
+
+            carsFromFile.ForEach(car => Console.WriteLine(car));
 
         }
     }

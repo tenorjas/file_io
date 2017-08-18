@@ -10,6 +10,11 @@ namespace file_io
         public int Doors { get; set; }
         public int Miles { get; set; }
 
+        public override string ToString()
+        {
+            return $"{ModelYear},{Make},{Model},{Doors},{Miles}";
+        }
+
         public Car()
         {
 
