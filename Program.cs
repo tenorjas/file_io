@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace file_io
 {
@@ -15,6 +17,15 @@ namespace file_io
             var altima = new Car() { ModelYear = 2014, Make = "Nissan", Model = "Altima", Doors = 4, Miles = 36489 };
 
             var fusion = new Car() { ModelYear = 2017, Make = "Ford", Model = "Fusion", Doors = 4, Miles = 1024 };
+
+            var carList = new List<Car> { corolla, civic, camaro, altima, fusion };
+
+            // open file for writing
+            using (var writer = new StreamWriter(File.Open("cars.csv", FileMode.OpenOrCreate)))
+            {
+                // write all the cars to a file
+                carList.ForEach(car => writer.WriteLine(car));
+            }
 
         }
     }
